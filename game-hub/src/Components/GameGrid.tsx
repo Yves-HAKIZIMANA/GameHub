@@ -3,6 +3,7 @@ import apiClient from "../services/api-client";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
+import GameCardSkeleton from "./GameCardSkeleton";
 
 interface Game {
   id: number;
@@ -15,11 +16,13 @@ interface FetchGamesResponse {
 }
 
 const GameGrid = () => {
-  const { games, errors } = useGames();
+  const { games, errors, isLoading } = useGames();
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   return (
     <>
       {errors && <Text>{errors}</Text>}
-      <SimpleGrid columns={3} spacing={10}>
+      <SimpleGrid columns={{sm: 3, md: 1, lg: 3, xl: 5 }} spacing={10}>
+        {isLoading && skeletons.map((skeleton) => <GameCardSkeleton />)}
         {games.map((game) => (
           <GameCard key={game.id} game={game} />
         ))}

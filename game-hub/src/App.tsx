@@ -9,6 +9,7 @@ import PlatformIconsList from "./Components/PlatformIconsList";
 import PlatformSelector from "./Components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 import SortSelector from "./Components/SortSelector";
+import DynamicHeader from "./Components/DynamicHeader";
 
 export interface GameQuery{
   genre : Genre | null;
@@ -60,6 +61,7 @@ function App() {
       </Show>
 
       <GridItem area="main">
+        <DynamicHeader gameQuery={gameQuery} />
         <HStack spacing={5} paddingLeft={2} marginBottom={5}>
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
